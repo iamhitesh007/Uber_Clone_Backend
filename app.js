@@ -30,8 +30,6 @@ app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(express.static(path.join(__dirname, "..", "/frontend/dist")));
-
 app.use("/public/uploads", express.static(filepath));
 
 app.get("/api", (req, res, next) => {
@@ -49,10 +47,6 @@ app.use("/api/*", (req, res, next) => {
     status: "fail",
     message: `can't find route ${req?.originalUrl} on this server..`,
   });
-});
-
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
 });
 
 export default app;
